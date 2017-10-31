@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/shipdata.iml" filepath="$PROJECT_DIR$/shipdata.iml" />
+      <module fileurl="file://$PROJECT_DIR$/shipdata-security/shipdata-security.iml" filepath="$PROJECT_DIR$/shipdata-security/shipdata-security.iml" />
+      <module fileurl="file://$PROJECT_DIR$/shipdata-service/shipdata-service.iml" filepath="$PROJECT_DIR$/shipdata-service/shipdata-service.iml" />
+    </modules>
+  </component>
+</project>
