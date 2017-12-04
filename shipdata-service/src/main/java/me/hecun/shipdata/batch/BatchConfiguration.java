@@ -21,7 +21,9 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 /**
  * spring batch 批处理任务的配置
  *
- * Created by hecun on 2017/10/26.
+ *
+ * @author hecun
+ * @date 2017/10/26
  */
 @Configuration
 @EnableBatchProcessing

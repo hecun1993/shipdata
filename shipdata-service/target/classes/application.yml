@@ -1,0 +1,29 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1/shipdata?characterEncoding=utf-8&useSSL=false
+    username: root
+    password: root
+  jpa:
+    generate-ddl: true
+    show-sql: true
+  batch:
+    job:
+      enabled: false
+    initializer:
+      enabled: true
+
+shipdata:
+  security:
+    browser:
+      loginType: REDIRECT
+      loginPage: /page-login.html
+
+mongodb:
+  host: 127.0.0.1
+  port: 27017
+  database: shipdata
+
+mongo:
+  url: mongodb://localhost:27017
+  db: shipdata

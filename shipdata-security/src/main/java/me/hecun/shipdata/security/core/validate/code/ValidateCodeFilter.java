@@ -53,7 +53,7 @@ import java.util.Set;
  *  在用户名密码过滤器之前,加一个验证码验证的过滤器
  *  要继承Spring提供的工具类OncePerRequestFilter, 保证这个过滤器每次只会被调用一次
  *
- * Created by hecun on 2017/9/30.
+ * Created by hecun on 2017/10/26.
  */
 @Component
 //实现InitializingBean接口的目的是为了初始化所有需要验证码校验的urls属性的值

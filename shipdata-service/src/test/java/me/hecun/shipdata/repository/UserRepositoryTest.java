@@ -27,7 +27,6 @@ public class UserRepositoryTest {
         user.setUsername("hds");
         String password = passwordEncoder.encode("123");
         user.setPassword(password);
-        user.setAuthority("ROLE_ADMIN");
 
         userRepository.save(user);
     }

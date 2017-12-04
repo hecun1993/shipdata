@@ -16,7 +16,9 @@ import java.io.File;
 import java.util.Date;
 
 /**
- * Created by hecun on 2017/10/27.
+ *
+ * @author hecun
+ * @date 2017/10/27
  */
 @Service
 public class BatchJobServiceImpl implements BatchJobService {
@@ -32,6 +34,7 @@ public class BatchJobServiceImpl implements BatchJobService {
 
     @Override
     public void startBatchJob(String fileName, String shipNumber, String roundId) {
+
         //要解析的文件资源
         FileSystemResource fileSystemResource = new FileSystemResource(new File(fileName));
         fileItemReader.setResource(fileSystemResource);

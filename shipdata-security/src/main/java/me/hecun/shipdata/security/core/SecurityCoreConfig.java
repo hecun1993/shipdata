@@ -16,7 +16,8 @@ import javax.sql.DataSource;
 /**
  * 一个配置类, 目的是让SecurityProperties类中的配置生效
  *
- * Created by hecun on 2017/10/25.
+ * @author hecun
+ * @date 2017/10/25
  */
 @Configuration
 @EnableConfigurationProperties(SecurityProperties.class)

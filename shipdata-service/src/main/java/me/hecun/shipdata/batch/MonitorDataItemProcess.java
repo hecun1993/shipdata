@@ -7,14 +7,16 @@ import org.springframework.stereotype.Component;
 import java.util.Date;
 
 /**
- * Created by hecun on 2017/10/28.
+ *
+ * @author hecun
+ * @date 2017/10/28
  */
 @Component
 public class MonitorDataItemProcess implements ItemProcessor<MonitorData, MonitorData> {
 
     @Override
     public MonitorData process(MonitorData monitorData) throws Exception {
-        monitorData.setCreateTime(new Date().getTime());
+        monitorData.setCreateTime(System.currentTimeMillis());
         return monitorData;
     }
 }

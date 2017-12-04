@@ -6,7 +6,9 @@ import lombok.EqualsAndHashCode;
 import me.hecun.shipdata.security.common.ResponseEnum;
 
 /**
- * Created by hecun on 2017/10/27.
+ *
+ * @author hecun
+ * @date 2017/10/27
  */
 @EqualsAndHashCode(callSuper = true)
 @Data

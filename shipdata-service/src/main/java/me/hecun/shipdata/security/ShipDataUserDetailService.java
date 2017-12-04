@@ -13,7 +13,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
 /**
- * Created by hecun on 2017/10/25.
+ *
+ * @author hecun
+ * @date 2017/10/25
  */
 @Component("userDetailsService")
 @Slf4j
@@ -31,7 +33,7 @@ public class ShipDataUserDetailService implements UserDetailsService {
 
         if (loginUser != null) {
             //2.返回UserDetails的实现类
-            return new SecurityUser(username, loginUser.getPassword(), AuthorityUtils.commaSeparatedStringToAuthorityList(loginUser.getAuthority()));
+            return new SecurityUser(username, loginUser.getPassword(), AuthorityUtils.commaSeparatedStringToAuthorityList("OPERATOR"));
         } else {
             throw new UserNotExistException(ResponseEnum.USER_NOT_EXIST);
         }

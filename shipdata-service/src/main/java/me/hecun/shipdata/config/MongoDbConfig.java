@@ -9,7 +9,10 @@ import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 /**
- * Created by hecun on 2017/10/27.
+ * mongodb配置
+ *
+ * @author hecun
+ * @date 2017/10/27
  */
 @Configuration
 @EnableMongoRepositories(basePackages = "me.hecun.shipdata.repository")

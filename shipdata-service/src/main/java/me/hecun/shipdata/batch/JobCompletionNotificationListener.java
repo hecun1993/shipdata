@@ -12,6 +12,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+/**
+ * @author hecun
+ */
 @Component
 @Slf4j
 public class JobCompletionNotificationListener extends JobExecutionListenerSupport {

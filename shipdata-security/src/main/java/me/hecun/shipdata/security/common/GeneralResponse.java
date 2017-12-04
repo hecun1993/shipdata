@@ -4,7 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 /**
- * Created by hecun on 2017/10/25.
+ *
+ * @author hecun
+ * @date 2017/10/25
  */
 @Data
 @AllArgsConstructor

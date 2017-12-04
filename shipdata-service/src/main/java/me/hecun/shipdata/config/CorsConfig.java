@@ -6,8 +6,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 /**
  * 允许前端跨域请求配置
- * <p>
- * Created by hecun on 2017/10/27.
+ *
+ * @author hecun
+ * @date 2017/10/27
  */
 @Configuration
 public class CorsConfig extends WebMvcConfigurerAdapter {

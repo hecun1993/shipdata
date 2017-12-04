@@ -13,6 +13,7 @@ import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.security.web.savedrequest.SavedRequest;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,7 +22,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Created by hecun on 2017/10/25.
+ *
+ * @author hecun
+ * @date 2017/10/25
  */
 @RestController
 @Slf4j
@@ -37,6 +40,7 @@ public class BrowserSecurityController {
     private SecurityProperties securityProperties;
 
     @GetMapping("/authentication/require")
+    @CrossOrigin(origins = "http://z.cn:4200")
     public ResponseEntity<GeneralResponse> requireAuthentication(HttpServletRequest httpServletRequest,
                                                                  HttpServletResponse httpServletResponse) throws IOException {
         //拿到缓存在session中的request类信息

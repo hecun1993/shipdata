@@ -8,10 +8,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
- * Created by hecun on 2017/10/26.
+ *
+ * @author hecun
+ * @date 2017/10/26
  */
 @ControllerAdvice
 public class SecurityExceptionHandler {
@@ -39,5 +42,12 @@ public class SecurityExceptionHandler {
     public ResponseEntity<GeneralResponse> handlerDataFileException() {
         GeneralResponse<Object> generalResponse = new GeneralResponse<>(ResponseEnum.DATA_FILE_ERROR, null);
         return new ResponseEntity<>(generalResponse, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(value = UserNotLoginException.class)
+    @ResponseBody
+    public ResponseEntity<GeneralResponse> handlerUserNotLogin() {
+        GeneralResponse<Object> generalResponse = new GeneralResponse<>(ResponseEnum.USER_NOT_LOGIN, null);
+        return new ResponseEntity<>(generalResponse, HttpStatus.OK);
     }
 }

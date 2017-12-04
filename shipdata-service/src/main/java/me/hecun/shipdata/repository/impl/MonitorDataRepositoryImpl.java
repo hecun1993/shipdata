@@ -14,7 +14,9 @@ import java.util.List;
 
 
 /**
- * Created by hecun on 2017/10/26.
+ *
+ * @author hecun
+ * @date 2017/10/26
  */
 @Repository
 public class MonitorDataRepositoryImpl implements MonitorDataRepository {
@@ -40,6 +42,13 @@ public class MonitorDataRepositoryImpl implements MonitorDataRepository {
     public List<MonitorData> findByRoundId(String roundId) {
         Query query = new Query();
         query.addCriteria(Criteria.where("roundId").is(roundId));
+        return mongoTemplate.find(query, MonitorData.class);
+    }
+
+    @Override
+    public List<MonitorData> findByRoundIdAndShipNumberAndDate(String roundId, String shipNumber, String date) {
+        Query query = new Query();
+        query.addCriteria(Criteria.where("roundId").is(roundId).and("shipNumber").is(shipNumber).and("date").is(date));
         return mongoTemplate.find(query, MonitorData.class);
     }
 }

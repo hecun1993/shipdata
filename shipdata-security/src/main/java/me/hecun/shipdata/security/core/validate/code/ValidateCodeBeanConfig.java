@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * Created by hecun on 2017/10/17.
+ * Created by hecun on 2017/10/26.
  */
 @Configuration
 public class ValidateCodeBeanConfig {

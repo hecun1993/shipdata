@@ -25,9 +25,17 @@ import java.time.Instant;
 @Slf4j
 public class FileController {
 
-    //设置存放上传的文件的本地的目录
+    /**
+     * 设置存放上传的文件的本地的目录
+     */
     private String folder = "/Users/hecun/JavaProjects/work/fudan/code/shipdata/shipdata-service/src/main/resources/data_files";
 
+    /**
+     * 上传文件
+     * @param file
+     * @return
+     * @throws IOException
+     */
     @PostMapping
     public ResponseEntity<GeneralResponse> upload(MultipartFile file) throws IOException {
         //上传时的文件名
@@ -46,7 +54,13 @@ public class FileController {
         return new ResponseEntity<>(generalResponse, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}") //文件下载
+    /**
+     * 文件下载
+     * @param id
+     * @param response
+     * @throws Exception
+     */
+    @GetMapping("/{id}")
     public void download(@PathVariable String id,
                          HttpServletResponse response) throws Exception {
         //jdk7新语法

@@ -17,7 +17,9 @@ import java.io.IOException;
 /**
  * 自定义登录成功后的处理逻辑
  *
- * Created by hecun on 2017/10/25.
+ *
+ * @author hecun
+ * @date 2017/10/25
  */
 @Component("authenticationSuccessHandler")
 @Slf4j
@@ -40,8 +42,7 @@ public class DefaultAuthenticationSuccessHandler extends SavedRequestAwareAuthen
             //把authentication对象以json形式返回给前端
             response.getWriter().write(objectMapper.writeValueAsString(authentication));
         } else {
-            //如果配置的LoginType不是JSON, 就采用默认跳转(跳回最原始时输入的html页面)
-            super.onAuthenticationSuccess(request, response, authentication);
+            response.sendRedirect("http://z.cn:4200");
         }
     }
 }

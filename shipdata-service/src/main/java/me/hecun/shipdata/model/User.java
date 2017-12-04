@@ -1,14 +1,20 @@
 package me.hecun.shipdata.model;
 
 import lombok.Data;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 
 /**
- * Created by hecun on 2017/10/25.
+ *
+ * @author hecun
+ * @date 2017/10/25
  */
 @Data
 @Entity
@@ -19,10 +25,25 @@ public class User {
     @GeneratedValue
     private Integer id;
 
-    //用户名
+    /**
+     * 用户名
+     */
+    @NotEmpty
     private String username;
-    //密码
+
+    /**
+     * 密码
+     */
     private String password;
-    //权限(16为普通权限)
-    private String authority;
+
+    /**
+     * 邮箱
+     */
+    @Email(message = "email must have correct format!")
+    private String email;
+
+    /**
+     * 角色
+     */
+    private String role;
 }

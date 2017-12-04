@@ -9,7 +9,9 @@ import java.util.Date;
 
 /**
  * $X（真风数据是否有效），XX.X（真风风速），XXX.X（真风风向），XXX.X（风向角），ZXX.X（左右倾角，R为右倾，L为左倾，Q为迎风情况下的倾斜，F为迎风情况下的反扣），ZXX.X（前后倾角），ZXX.X（VMG）*
- * Created by hecun on 2017/10/26.
+ *
+ * @author hecun
+ * @date 2017/10/26
  */
 @Data
 @Document(collection = "vmg_data")

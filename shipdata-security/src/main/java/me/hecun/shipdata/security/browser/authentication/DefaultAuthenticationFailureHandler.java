@@ -18,7 +18,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Created by hecun on 2017/10/25.
+ *
+ * @author hecun
+ * @date 2017/10/25
  */
 @Component("authenticationFailureHandler")
 @Slf4j
@@ -31,7 +33,9 @@ public class DefaultAuthenticationFailureHandler extends SimpleUrlAuthentication
     private SecurityProperties securityProperties;
 
     @Override
-    public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
+    public void onAuthenticationFailure(HttpServletRequest request,
+                                        HttpServletResponse response,
+                                        AuthenticationException exception) throws IOException, ServletException {
         log.info("登录失败!");
 
         if (LoginType.JSON.equals(securityProperties.getBrowser().getLoginType())) {

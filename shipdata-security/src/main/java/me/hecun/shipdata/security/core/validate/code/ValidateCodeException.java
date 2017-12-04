@@ -7,7 +7,7 @@ import org.springframework.security.core.AuthenticationException;
  * 自己创建的验证码校验错误异常类
  *
  * 所有身份认证中的校验异常, 都要继承Spring提供的AuthenticationException
- * Created by hecun on 2017/9/30.
+ * Created by hecun on 2017/10/26.
  */
 public class ValidateCodeException extends AuthenticationException {
 

@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Created by hecun on 2017/9/30.
+ * Created by hecun on 2017/10/26.
  */
 @RestController
 public class ValidateCodeController {
