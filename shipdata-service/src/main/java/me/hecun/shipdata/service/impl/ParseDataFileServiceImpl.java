@@ -9,13 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- * Created by hecun on 2017/10/27.
+ *
+ * @author hecun
+ * @date 2017/10/27
  */
 @Service
 public class ParseDataFileServiceImpl implements ParseDataFileService {
-
-    @Autowired
-    private MonitorDataRepository monitorDataRepository;
 
     @Override
     public String parseDataFile(String fileName) {

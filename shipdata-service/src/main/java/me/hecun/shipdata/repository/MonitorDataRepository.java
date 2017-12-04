@@ -11,11 +11,10 @@ import java.util.List;
  * @date 2017/10/26
  */
 public interface MonitorDataRepository extends Repository<MonitorData, String> {
+
     void save(MonitorData monitorData);
 
     List<MonitorData> findLatestMonitorDatas(Integer totalLines);
-
-    List<MonitorData> findByRoundId(String roundId);
 
     List<MonitorData> findByRoundIdAndShipNumberAndDate(String roundId, String shipNumber, String date);
 }

@@ -4,7 +4,9 @@ import java.util.UUID;
 import java.util.stream.IntStream;
 
 /**
- * Created by hecun on 2017/10/27.
+ *
+ * @author hecun
+ * @date 2017/10/27
  */
 public class UuidUtil {
 

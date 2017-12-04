@@ -18,7 +18,9 @@ import java.time.Instant;
 /**
  * 文件上传和下载
  *
- * Created by hecun on 2017/10/26.
+ *
+ * @author hecun
+ * @date 2017/10/26
  */
 @RestController
 @RequestMapping("/file")

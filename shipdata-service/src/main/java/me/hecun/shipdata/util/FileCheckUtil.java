@@ -7,7 +7,9 @@ import org.apache.commons.lang.StringUtils;
 import java.io.*;
 
 /**
- * Created by hecun on 2017/10/26.
+ *
+ * @author hecun
+ * @date 2017/10/26
  */
 public class FileCheckUtil {
 

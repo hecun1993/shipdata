@@ -11,7 +11,5 @@ import java.util.List;
  */
 public interface MonitorDataService {
 
-    List<MonitorData> findByRoundId(String roundId);
-
     List<MonitorData> findByRoundIdAndShipNumberAndDate(String roundId, String shipNumber, String date);
 }

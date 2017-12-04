@@ -24,11 +24,6 @@ public class MonitorDataServiceImpl implements MonitorDataService {
     private MonitorDataRepository monitorDataRepository;
 
     @Override
-    public List<MonitorData> findByRoundId(String roundId) {
-        return monitorDataRepository.findByRoundId(roundId);
-    }
-
-    @Override
     public List<MonitorData> findByRoundIdAndShipNumberAndDate(String roundId, String shipNumber, String date) {
         return monitorDataRepository.findByRoundIdAndShipNumberAndDate(roundId, shipNumber, date);
     }

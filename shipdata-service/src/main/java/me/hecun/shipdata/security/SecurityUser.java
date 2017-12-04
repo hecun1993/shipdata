@@ -14,7 +14,9 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Created by hecun on 2017/10/25.
+ *
+ * @author hecun
+ * @date 2017/10/25
  */
 @Data
 @AllArgsConstructor
@@ -27,7 +29,9 @@ public class SecurityUser implements UserDetails {
     private boolean credentialsNonExpired = true;
     private boolean enabled = true;
 
-    //权限的集合
+    /**
+     * 权限的集合
+     */
     private List<GrantedAuthority> authorities;
 
     public SecurityUser(String username, String password, List<GrantedAuthority> authorities) {

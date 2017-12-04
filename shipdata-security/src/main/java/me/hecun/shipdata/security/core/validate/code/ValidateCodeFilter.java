@@ -45,7 +45,8 @@ import java.util.Set;
  *      下面需要把验证码的生成逻辑, 也就是generate方法做成可以配置的
  *      创建一个ValidateCodeBeanConfig
  *      来配置ImageCodeGenerator, 把它放入spring容器中, 名字就是方法名imageCodeGenerator
- *      @OnConditioinalMissingBean(name="imageCodeGenerator")
+ *      @author hecun
+ * @OnConditioinalMissingBean(name="imageCodeGenerator")
  *      如果spring容器中有应用级的DemoImageCodeGenerator, 其在spring中的名字也是ImageCodeGenerator, 则会使用应用级的图形验证码生成逻辑
  *
  *

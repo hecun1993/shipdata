@@ -9,7 +9,9 @@ import java.time.LocalDateTime;
 /**
  * 封装图形验证码
  *
- * Created by hecun on 2017/10/26.
+ *
+ * @author hecun
+ * @date 2017/10/26
  */
 @Data
 @AllArgsConstructor

@@ -3,7 +3,9 @@ package me.hecun.shipdata.security.core.properties;
 import lombok.Data;
 
 /**
- * Created by hecun on 2017/10/25.
+ *
+ * @author hecun
+ * @date 2017/10/25
  */
 @Data
 public class BrowserProperties {

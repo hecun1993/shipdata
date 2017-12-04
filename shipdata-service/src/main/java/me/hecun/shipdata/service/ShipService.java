@@ -22,7 +22,6 @@ public interface ShipService {
 
     /**
      * 查到所有的帆船
-     * @return
      */
     List<Ship> findAllShip();
 }

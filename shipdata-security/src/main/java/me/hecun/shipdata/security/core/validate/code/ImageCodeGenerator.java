@@ -11,7 +11,9 @@ import java.util.Random;
 /**
  * 图形验证码生成器
  *
- * Created by hecun on 2017/10/26.
+ *
+ * @author hecun
+ * @date 2017/10/26
  */
 //这里没有加@Component放入spring容器中, 而是用Java配置的方式在ValidateCodeBeanConfig中配置, 目的就是实现验证码生成逻辑可以配置
 public class ImageCodeGenerator implements ValidateCodeGenerator {
