@@ -8,6 +8,7 @@
       <w>hdfs</w>
       <w>mapreduce</w>
       <w>monitordata</w>
+      <w>parallelize</w>
       <w>scrapy</w>
       <w>semibold</w>
       <w>shipdata</w>

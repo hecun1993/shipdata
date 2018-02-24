@@ -11,6 +11,8 @@
 
     <artifactId>shipdata-service</artifactId>
 
+
+
     <dependencies>
         <!--引入对spring security 安全框架的依赖-->
         <dependency>

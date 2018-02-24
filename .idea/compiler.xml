@@ -9,12 +9,14 @@
         <outputRelativeToContentRoot value="true" />
         <module name="shipdata-security" />
         <module name="shipdata-service" />
+        <module name="shipdata-streaming" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="shipdata" target="1.8" />
       <module name="shipdata-security" target="1.8" />
       <module name="shipdata-service" target="1.8" />
+      <module name="shipdata-streaming" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

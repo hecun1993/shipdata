@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/shipdata.iml" filepath="$PROJECT_DIR$/shipdata.iml" />
       <module fileurl="file://$PROJECT_DIR$/shipdata-security/shipdata-security.iml" filepath="$PROJECT_DIR$/shipdata-security/shipdata-security.iml" />
       <module fileurl="file://$PROJECT_DIR$/shipdata-service/shipdata-service.iml" filepath="$PROJECT_DIR$/shipdata-service/shipdata-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/shipdata-streaming/shipdata-streaming.iml" filepath="$PROJECT_DIR$/shipdata-streaming/shipdata-streaming.iml" />
     </modules>
   </component>
 </project>

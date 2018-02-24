@@ -12,6 +12,7 @@
     <modules>
         <module>shipdata-security</module>
         <module>shipdata-service</module>
+        <module>shipdata-streaming</module>
     </modules>
 
     <properties>
