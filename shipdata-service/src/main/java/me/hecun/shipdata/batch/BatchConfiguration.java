@@ -1,5 +1,6 @@
 package me.hecun.shipdata.batch;
 
+import me.hecun.shipdata.model.FMSData;
 import me.hecun.shipdata.model.MonitorData;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
@@ -14,6 +15,7 @@ import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
 import org.springframework.batch.item.file.mapping.DefaultLineMapper;
 import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -37,6 +39,64 @@ public class BatchConfiguration {
 
     @Autowired
     private MongoTemplate mongoTemplate;
+
+    @Bean
+    public FlatFileItemReader<FMSData> fmsFileItemReader() {
+        FlatFileItemReader<FMSData> fmsDataFlatFileItemReader = new FlatFileItemReader<>();
+
+        fmsDataFlatFileItemReader.setLineMapper(
+                new DefaultLineMapper<FMSData>() {
+                    {
+                        setLineTokenizer(new DelimitedLineTokenizer(",") {
+                            {
+                                setNames(new String[] {"testDate", "username", "deepSquat", "hurdleStep", "inLineLunge", "shoulderMobility", "activeStraightLegRaise", "trunkStability", "rotaryStabilityQuadruped", "totalScore"});
+                            }
+                        });
+                        setFieldSetMapper(new BeanWrapperFieldSetMapper<FMSData>() {
+                            {
+                                setTargetType(FMSData.class);
+                            }
+                        });
+                    }
+                }
+        );
+
+        return fmsDataFlatFileItemReader;
+    }
+
+    public ItemProcessor<FMSData, FMSData> fmsDataItemProcessor() {
+        return new FMSDataItemProcess();
+    }
+
+    @Bean
+    public MongoItemWriter<FMSData> fmsDataMongoItemWriter() {
+        MongoItemWriter<FMSData> fmsDataMongoItemWriter = new MongoItemWriter<>();
+        fmsDataMongoItemWriter.setTemplate(mongoTemplate);
+        fmsDataMongoItemWriter.setCollection("fms_data");
+        return fmsDataMongoItemWriter;
+    }
+
+    @Bean
+    public Job importFMSDataJob(FMSJobCompletionNotificationListener listener) {
+        return jobBuilderFactory.get("importFMSDataJob")
+                .incrementer(new RunIdIncrementer())
+                .listener(listener)
+                .flow(importFMSDataStep())
+                .end()
+                .build();
+    }
+
+    @Bean
+    public Step importFMSDataStep() {
+        return stepBuilderFactory.get("importFMSDataStep")
+                .<FMSData, FMSData>chunk(100)
+                .reader(fmsFileItemReader())
+                .processor(fmsDataItemProcessor())
+                .writer(fmsDataMongoItemWriter())
+                .build();
+    }
+
+    //======================================================================
 
     @Bean
     public FlatFileItemReader<MonitorData> fileItemReader() {

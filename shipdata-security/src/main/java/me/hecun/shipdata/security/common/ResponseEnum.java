@@ -18,6 +18,7 @@ public enum ResponseEnum {
     USER_CREATE_ERROR(23, "create user error!"),
     SHIP_NOT_EXIST(31, "Ship not exist!"),
     MONITORDATA_NOT_EXIST(41, "Monitor data not exist! Please confirm the search params!"),
+    FMSDATA_NOT_EXIST(42, "FMS data not exist! Please confirm the username!")
     ;
 
     public int code;

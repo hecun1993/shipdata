@@ -24,12 +24,12 @@ public class JobCompletionNotificationListener extends JobExecutionListenerSuppo
 
     @Override
     public void beforeJob(JobExecution jobExecution) {
-        log.info("start .....");
+        log.info("monitor data start .....");
     }
 
     @Override
     public void afterJob(JobExecution jobExecution) {
-        log.info("end .....");
+        log.info("monitor data end .....");
 
         JobParameters jobParameters = jobExecution.getJobParameters();
         String roundId = jobParameters.getString("roundId");

@@ -1,0 +1,151 @@
+python定时产生日志
+
+crontab -u root -e
+*/1 * * * * /home/hadoop/code/data_gen/start_gen_data.sh
+
+
+
+* 从flume读取到kafka中
+
+ship_monitor_project.conf
+	
+# 定义三大组件
+spooldir-memory-kafka.sources = spooldir-source
+spooldir-memory-kafka.sinks = kafka-sink
+spooldir-memory-kafka.channels = memory-channel
+
+# 定义source
+spooldir-memory-kafka.sources.spooldir-source.type = spooldir
+spooldir-memory-kafka.sources.spooldir-source.spoolDir = /home/hadoop/data/monitor_data
+spooldir-memory-kafka.sources.spooldir-source.fileHeader = true
+
+# 定义channels
+spooldir-memory-kafka.channels.memory-channel.type = memory
+
+# 定义sink
+spooldir-memory-kafka.sinks.kafka-sink.type = org.apache.flume.sink.kafka.KafkaSink
+spooldir-memory-kafka.sinks.kafka-sink.brokerList = hadoop01:9092
+spooldir-memory-kafka.sinks.kafka-sink.topic = streaming_topic
+spooldir-memory-kafka.sinks.kafka-sink.batchSize = 5
+spooldir-memory-kafka.sinks.kafka-sink.requiredAcks = 1
+
+# 组装关系
+spooldir-memory-kafka.sources.spooldir-source.channels = memory-channel
+spooldir-memory-kafka.sinks.kafka-sink.channel = memory-channel
+
+启动zk:
+./zkServer start
+
+启动kafka:
+./kafka-server-start.sh -daemon /home/hadoop/app/kafka_2.11-0.9.0.0/config/server.properties
+
+创建kafka的topic:
+./kafka-topics.sh --create --zookeeper hadoop01:2181 --replication-factor 1 --partitions 3 --topic streaming_topic
+
+查看所有的topic
+./kafka-topics.sh --list --zookeeper hadoop01:2181
+
+再定义一个kafka的消费者, 并启动(阻塞)
+./kafka-console-consumer.sh --zookeeper hadoop01:2181 --topic streaming_topic
+
+启动flume:
+flume-ng agent \
+--name spooldir-memory-kafka \
+--conf $FLUME_HOME/conf \
+--conf-file /home/hadoop/code/ship_monitor_project.conf \
+-Dflume.root.logger=INFO,console
+
+
+
+
+* 只有flume, 无kafka, 输出到logger的配置文件:
+
+ship_monitor_project_logger.conf
+
+要从文件中读取: Flume数据源是spooldir, 通道是memory, 先输出到控制台
+
+# 定义三大组件
+spooldir-memory-logger.sources = spooldir-source
+spooldir-memory-logger.sinks = logger-sink
+spooldir-memory-logger.channels = memory-channel
+
+# 定义source
+spooldir-memory-kafka.sources.spooldir-source.type = spooldir
+spooldir-memory-kafka.sources.spooldir-source.spoolDir = /home/hadoop/data/monitor_data
+spooldir-memory-kafka.sources.spooldir-source.fileHeader = true
+
+# 定义channels
+spooldir-memory-logger.channels.memory-channel.type = memory
+
+# 定义sink
+spooldir-memory-logger.sinks.logger-sink.type = logger
+
+# 组装关系
+spooldir-memory-logger.sources.spooldir-source.channels = memory-channel
+spooldir-memory-logger.sinks.logger-sink.channel = memory-channel
+
+# 启动flume
+flume-ng agent \
+--name spooldir-memory-logger \
+--conf $FLUME_HOME/conf \
+--conf-file /home/hadoop/code/ship_monitor_project_logger.conf \
+-Dflume.root.logger=INFO,console
+
+
+
+
+
+
+kafka_producer: 发送消息
+./kafka-console-producer.sh --broker-list hadoop:9092 --topic streaming_topic
+
+kafka_consumer: 接收消息
+./kafka-console-consumer.sh --zookeeper hadoop:2181 --topic streaming_topic
+	--from-beginning 表示从头开始消费
+
+./kafka-topics.sh --describe --topic streaming_topic  --zookeeper hadoop:2181 
+
+./kafka-topics.sh --delete --zookeeper hadoop:2181 --topic streaming_topic
+
+
+cp server.properties server-1.properties
+	broker.id=1
+	listeners=9093
+	log.dirs=kafka-logs-1
+cp server.properties server-2.properties
+	broker.id=2
+	listeners=9094
+	log.dirs=kafka-logs-2
+cp server.properties server-3.properties
+	broker.id=3
+	listeners=9095
+	log.dirs=kafka-logs-3
+
+./kafka-server-start.sh -daemon $KAFKA_HOME/config/server-1.properties &
+./kafka-server-start.sh -daemon $KAFKA_HOME/config/server-2.properties &
+./kafka-server-start.sh -daemon $KAFKA_HOME/config/server-3.properties &
+
+此时可以指定副本数为3
+	./kafka-topics.sh --create --zookeeper hadoop:2181 --replication-factor 3 --partition 1 --topic many_bloker_topic
+
+
+Kafka架构
+
+producer
+consumer
+broker(在kafka集群中, 一个kafka就是一个broker)
+topic: 给信息和数据(record)打了标签
+	每一个record都是由key value timestamp组成的
+
+单节点单broker
+单节点多broker
+多节点多broker
+
+
+zookeeper
+	指定data dir
+
+server.properties
+	log.dirs = /home/hadoop/tmp/kafka-logs
+
+

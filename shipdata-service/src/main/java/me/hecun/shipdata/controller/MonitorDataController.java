@@ -36,7 +36,7 @@ public class MonitorDataController {
     /**
      * 设置存放上传的文件的本地的目录
      */
-    private String folder = "/Users/hecun/JavaProjects/work/fudan/code/shipdata/shipdata-service/src/main/resources/data_files";
+    private String monitorDataFolder = System.getProperty("user.dir") + "\\shipdata-service\\src\\main\\resources\\data_files";
 
     @Autowired
     private ParseDataFileService parseDataFileService;
@@ -49,6 +49,7 @@ public class MonitorDataController {
 
     @PostMapping("/upload")
     public ResponseEntity<GeneralResponse> upload(MultipartFile file) throws IOException {
+        log.info("start to upload monitor data file.");
         //上传时的文件名
         log.info("file name is {}", file.getOriginalFilename());
 
@@ -59,7 +60,7 @@ public class MonitorDataController {
         //设置存放上传文件的文件名(文件夹 + 文件名)
         String timestamp = Instant.now().toString();
         String localFileName = timestamp + String.valueOf(RandomUtils.nextInt(1000));
-        File localFile = new File(folder, localFileName + ".txt");
+        File localFile = new File(monitorDataFolder, localFileName + ".txt");
 
         //上传文件
         file.transferTo(localFile);

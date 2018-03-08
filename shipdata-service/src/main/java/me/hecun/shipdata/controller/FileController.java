@@ -10,14 +10,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.time.Instant;
 
 /**
  * 文件上传和下载
- *
  *
  * @author hecun
  * @date 2017/10/26
@@ -30,23 +28,51 @@ public class FileController {
     /**
      * 设置存放上传的文件的本地的目录
      */
-    private String folder = "/Users/hecun/JavaProjects/work/fudan/code/shipdata/shipdata-service/src/main/resources/data_files";
+    //private String folder = "/Users/hecun/JavaProjects/work/fudan/code/shipdata/shipdata-service/src/main/resources/data_files";
+    private String monitorDataFolder = System.getProperty("user.dir") + "\\shipdata-service\\src\\main\\resources\\data_files";
+    private String fMSDataFolder = System.getProperty("user.dir") + "\\shipdata-service\\src\\main\\resources\\fms_data_files";
 
     /**
-     * 上传文件
+     * 上传 Monitor Data 文件
      * @param file
      * @return
      * @throws IOException
      */
-    @PostMapping
+    @PostMapping("/monitor")
     public ResponseEntity<GeneralResponse> upload(MultipartFile file) throws IOException {
+        log.info("start to upload monitor data file.");
         //上传时的文件名
         log.info("file name is {}", file.getOriginalFilename());
 
         //设置存放上传文件的文件名(文件夹 + 文件名)
         String timestamp = Instant.now().toString();
         String localFileName = timestamp + String.valueOf(RandomUtils.nextInt(1000));
-        File localFile = new File(folder, localFileName + ".txt");
+        File localFile = new File(monitorDataFolder, localFileName + ".txt");
+
+        //上传文件
+        file.transferTo(localFile);
+
+        String filePath = localFile.getAbsolutePath();
+        GeneralResponse<String> generalResponse = new GeneralResponse<>(ResponseEnum.SUCCESS, filePath);
+        return new ResponseEntity<>(generalResponse, HttpStatus.OK);
+    }
+
+    /**
+     * 上传 FMS Data 文件
+     * @param file
+     * @return
+     * @throws IOException
+     */
+    @PostMapping("/fms")
+    public ResponseEntity<GeneralResponse> uploadFMSData(MultipartFile file) throws IOException {
+        log.info("start to upload fms data file.");
+        //上传时的文件名
+        log.info("file name is {}", file.getOriginalFilename());
+
+        //设置存放上传文件的文件名(文件夹 + 文件名)
+        String timestamp = Instant.now().toString();
+        String localFileName = timestamp + String.valueOf(RandomUtils.nextInt(1000));
+        File localFile = new File(fMSDataFolder, localFileName + ".txt");
 
         //上传文件
         file.transferTo(localFile);
@@ -68,7 +94,7 @@ public class FileController {
         //jdk7新语法
         //从服务器上获得文件的输入流, 文件名由controller参数传入
         //从response中获得输出流, 写到响应中
-        try (InputStream inputStream = new FileInputStream(new File(folder, id + ".txt"));
+        try (InputStream inputStream = new FileInputStream(new File(monitorDataFolder, id + ".txt"));
              OutputStream outputStream = response.getOutputStream()) {
 
             //设置response的属性, 变为下载文件

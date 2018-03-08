@@ -32,6 +32,14 @@ public class BatchJobServiceImpl implements BatchJobService {
     @Autowired
     private Job importMonitorDataJob;
 
+    //=====================================================
+
+    @Autowired
+    private FlatFileItemReader fmsFileItemReader;
+
+    @Autowired
+    private Job importFMSDataJob;
+
     @Override
     public void startBatchJob(String fileName, String shipNumber, String roundId) {
 
@@ -47,6 +55,19 @@ public class BatchJobServiceImpl implements BatchJobService {
                     .addDate("date", new Date())
                     .toJobParameters();
             jobLauncher.run(importMonitorDataJob, jobParameters);
+        } catch (Exception e) {
+            throw new BatchJobException(ResponseEnum.BATCH_JOB_ERROR);
+        }
+    }
+
+    @Override
+    public void startFMSBatchJob(String fileName) {
+        FileSystemResource fileSystemResource = new FileSystemResource(new File(fileName));
+        fmsFileItemReader.setResource(fileSystemResource);
+
+        try {
+            JobParameters jobParameters = new JobParameters();
+            jobLauncher.run(importFMSDataJob, jobParameters);
         } catch (Exception e) {
             throw new BatchJobException(ResponseEnum.BATCH_JOB_ERROR);
         }
