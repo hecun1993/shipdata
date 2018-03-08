@@ -10,5 +10,5 @@ import java.util.Date;
  */
 public interface FMSDataService {
 
-    FMSData findByUsernameAndTestDate(String username, Date testDate);
+    FMSData findByUsernameAndTestDate(String username, String testDate);
 }

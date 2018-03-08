@@ -21,7 +21,7 @@ public class FMSDataServiceImpl implements FMSDataService {
     private FMSDataRepository fmsDataRepository;
 
     @Override
-    public FMSData findByUsernameAndTestDate(String username, Date testDate) {
+    public FMSData findByUsernameAndTestDate(String username, String testDate) {
         return fmsDataRepository.findByUsernameAndTestDate(username, testDate);
     }
 }

@@ -1,5 +1,7 @@
 package me.hecun.shipdata.service;
 
+import java.util.Date;
+
 /**
  *
  * @author hecun
@@ -19,5 +21,5 @@ public interface BatchJobService {
      * 开始FMS data的批处理任务
      * @param fileName
      */
-    void startFMSBatchJob(String fileName);
+    void startFMSBatchJob(String fileName, String username, String testDate);
 }

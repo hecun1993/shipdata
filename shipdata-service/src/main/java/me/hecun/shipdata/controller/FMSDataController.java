@@ -7,11 +7,8 @@ import me.hecun.shipdata.security.common.GeneralResponse;
 import me.hecun.shipdata.security.common.ResponseEnum;
 import me.hecun.shipdata.service.BatchJobService;
 import me.hecun.shipdata.service.FMSDataService;
-import me.hecun.shipdata.service.ParseDataFileService;
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.math.RandomUtils;
+import me.hecun.shipdata.util.UuidUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,8 +16,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.time.Instant;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -36,7 +31,7 @@ public class FMSDataController {
     /**
      * 设置存放上传的文件的本地的目录
      */
-    private String fMSDataFolder = System.getProperty("user.dir") + "\\shipdata-service\\src\\main\\resources\\fms_data_files";
+    private String fMSDataFolder = System.getProperty("user.dir") + "/shipdata-service/src/main/resources/fms_data_files";
 
     @Autowired
     private BatchJobService batchJobService;
@@ -50,9 +45,15 @@ public class FMSDataController {
         //上传时的文件名
         log.info("file name is {}", file.getOriginalFilename());
 
+        String originalFileName = file.getOriginalFilename();
+        log.info(originalFileName);
+
+        String[] splitFileName = originalFileName.split("-");
+        String username = splitFileName[0];
+        String testDate = (splitFileName[1].split("."))[0];
+
         //设置存放上传文件的文件名(文件夹 + 文件名)
-        String timestamp = Instant.now().toString();
-        String localFileName = timestamp + String.valueOf(RandomUtils.nextInt(1000));
+        String localFileName = UuidUtil.genShortUuid();
         File localFile = new File(fMSDataFolder, localFileName + ".txt");
 
         //上传文件
@@ -62,7 +63,7 @@ public class FMSDataController {
         String fileName = localFile.getAbsolutePath();
 
         //执行批处理任务
-        batchJobService.startFMSBatchJob(fileName);
+        batchJobService.startFMSBatchJob(fileName, username, testDate);
 
         GeneralResponse<FileResult> generalResponse = new GeneralResponse<>(ResponseEnum.SUCCESS, null);
         return new ResponseEntity<>(generalResponse, HttpStatus.OK);
@@ -70,7 +71,7 @@ public class FMSDataController {
 
     @GetMapping("/username/date")
     public ResponseEntity<GeneralResponse> findByUsernameAndTestDate(@RequestParam("username") String username,
-                                                                     @RequestParam("testDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date testDate) {
+                                                                     @RequestParam("testDate") String testDate) {
         FMSData fmsData = fmsDataService.findByUsernameAndTestDate(username, testDate);
 
         if (fmsData == null) {

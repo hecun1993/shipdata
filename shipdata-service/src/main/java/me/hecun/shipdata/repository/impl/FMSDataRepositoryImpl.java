@@ -1,8 +1,10 @@
 package me.hecun.shipdata.repository.impl;
 
 import me.hecun.shipdata.model.FMSData;
+import me.hecun.shipdata.model.MonitorData;
 import me.hecun.shipdata.repository.FMSDataRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -27,10 +29,19 @@ public class FMSDataRepositoryImpl implements FMSDataRepository {
     }
 
     @Override
-    public FMSData findByUsernameAndTestDate(String username, Date testDate) {
+    public FMSData findByUsernameAndTestDate(String username, String testDate) {
         Query query = new Query();
         query.addCriteria(Criteria.where("username").is(username).and("testDate").is(testDate));
         return mongoTemplate.findOne(query, FMSData.class);
+    }
+
+    @Override
+    public List<FMSData> findLatestFMSData() {
+        Query query = new Query();
+        query.with(new Sort(Sort.Direction.DESC, "createTime"));
+        query.limit(1);
+
+        return mongoTemplate.find(query, FMSData.class);
     }
 
     @Override

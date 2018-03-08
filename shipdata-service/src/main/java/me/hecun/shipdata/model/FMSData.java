@@ -29,7 +29,7 @@ public class FMSData {
     /**
      * 测试时间
      */
-    private Date testDate;
+    private String testDate;
 
     /**
      * 运动员的名字
@@ -44,22 +44,26 @@ public class FMSData {
     /**
      * 跨栏架
      */
-    private Double hurdleStep;
+    private Double rightHurdleStep;
+    private Double leftHurdleStep;
 
     /**
      * 直线弓箭步蹲
      */
-    private Double inLineLunge;
+    private Double rightInLineLunge;
+    private Double leftInLineLunge;
 
     /**
      * 肩膀灵活性
      */
-    private Double shoulderMobility;
+    private Double rightShoulderMobility;
+    private Double leftShoulderMobility;
 
     /**
      * 直腿主动上抬
      */
-    private Double activeStraightLegRaise;
+    private Double rightActiveStraightLegRaise;
+    private Double leftActiveStraightLegRaise;
 
     /**
      * 控体俯卧撑
@@ -69,7 +73,8 @@ public class FMSData {
     /**
      * 转体稳定性
      */
-    private Double rotaryStabilityQuadruped;
+    private Double rightRotaryStabilityQuadruped;
+    private Double leftRotaryStabilityQuadruped;
 
     /**
      * 个人总分

@@ -42,9 +42,11 @@ public class BatchJobController {
     }
 
     @GetMapping("/start/fms")
-    public ResponseEntity<GeneralResponse> startFMSBatchJob(@RequestParam("fileName") String fileName) {
+    public ResponseEntity<GeneralResponse> startFMSBatchJob(@RequestParam("fileName") String fileName,
+                                                            @RequestParam("username") String username,
+                                                            @RequestParam("testDate") String testDate) {
 
-        batchJobService.startFMSBatchJob(fileName);
+        batchJobService.startFMSBatchJob(fileName, username, testDate);
 
         GeneralResponse<Object> generalResponse = new GeneralResponse<>(ResponseEnum.SUCCESS, null);
         return new ResponseEntity<>(generalResponse, HttpStatus.OK);

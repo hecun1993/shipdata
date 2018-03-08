@@ -49,7 +49,7 @@ public class BatchConfiguration {
                     {
                         setLineTokenizer(new DelimitedLineTokenizer(",") {
                             {
-                                setNames(new String[] {"testDate", "username", "deepSquat", "hurdleStep", "inLineLunge", "shoulderMobility", "activeStraightLegRaise", "trunkStability", "rotaryStabilityQuadruped", "totalScore"});
+                                setNames(new String[] {"deepSquat", "rightHurdleStep", "leftHurdleStep", "rightInLineLunge", "leftInLineLunge", "rightShoulderMobility", "leftShoulderMobility", "rightActiveStraightLegRaise", "leftActiveStraightLegRaise", "trunkStability", "rightRotaryStabilityQuadruped", "leftRotaryStabilityQuadruped", "totalScore"});
                             }
                         });
                         setFieldSetMapper(new BeanWrapperFieldSetMapper<FMSData>() {

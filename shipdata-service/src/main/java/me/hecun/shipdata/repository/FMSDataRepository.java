@@ -14,7 +14,9 @@ public interface FMSDataRepository extends Repository<FMSData, String> {
 
     void save(FMSData fmsData);
 
-    FMSData findByUsernameAndTestDate(String username, Date testDate);
+    FMSData findByUsernameAndTestDate(String username, String testDate);
+
+    List<FMSData> findLatestFMSData();
 
     List<FMSData> findAll();
 }

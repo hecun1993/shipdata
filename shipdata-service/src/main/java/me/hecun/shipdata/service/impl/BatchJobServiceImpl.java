@@ -61,12 +61,16 @@ public class BatchJobServiceImpl implements BatchJobService {
     }
 
     @Override
-    public void startFMSBatchJob(String fileName) {
+    public void startFMSBatchJob(String fileName, String username, String testDate) {
         FileSystemResource fileSystemResource = new FileSystemResource(new File(fileName));
         fmsFileItemReader.setResource(fileSystemResource);
 
         try {
-            JobParameters jobParameters = new JobParameters();
+            JobParameters jobParameters = new JobParametersBuilder()
+                    .addString("username", username)
+                    .addString("testDate", testDate)
+                    .addString("fileName", fileName)
+                    .toJobParameters();
             jobLauncher.run(importFMSDataJob, jobParameters);
         } catch (Exception e) {
             throw new BatchJobException(ResponseEnum.BATCH_JOB_ERROR);
