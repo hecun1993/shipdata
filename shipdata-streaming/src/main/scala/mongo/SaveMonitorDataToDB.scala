@@ -1,9 +1,9 @@
 package mongo
 
 import com.mongodb.MongoClientOptions.Builder
-import com.mongodb.casbah.commons.{Imports, MongoDBObject}
 import com.mongodb.{DB, MongoClient, MongoClientOptions}
 import model.MonitorData
+import com.mongodb.casbah.commons.{Imports, MongoDBObject}
 import org.apache.spark.SparkConf
 import org.apache.spark.streaming.kafka.KafkaUtils
 import org.apache.spark.streaming.{Seconds, StreamingContext}
