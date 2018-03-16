@@ -1,3 +1,5 @@
+ng serve --host z.cn
+
 === v1 ===
 1. 使用spring boot / spring security / Angular4 / Semantic UI 搭建数据展示网站.
 	

@@ -5,8 +5,6 @@ package model
   * 2017-12-12 下午7:12
   */
 case class MonitorData(
-                      roundId: String,
-                      shipNumber: String,
                       date: String,
                       time: String,
                       isGPS: String,
